@@ -1,12 +1,12 @@
-require 'Mob'
-require 'skills_and_magic'
+require_relative 'Mob'
+require_relative 'skills_and_magic'
 
 #$lvl = 1 Somehow include levels, i.e. once $player beats first mob, gains spells/skill and mob increases difficulty. Topoff at lvl 5
 
 
 ################### GLOBAL VARIABLES
 
-$race_info = <<PARAGRAPH 
+$race_info = <<PARAGRAPH
 1) Human Paladin - a noble soldier with heal and protection spells.
 2) Elf Ranger - adept with a bow and an agile fighter, but very fragile.
 3) Ancient Wizard - a being that has survived time through ancient magic.
@@ -98,7 +98,7 @@ end
 
 def battle()
 	mob_hits = 0
-	
+
 	puts "\nThe Dragon has #{$mob.hp} HP left \n"
 	puts "You raise your guard. What shall we do (Magic or Attack)?"
 	print "Your stats: ( #{$stats[:hp]}Hp #{$stats[:mp]}MP ) "
@@ -110,15 +110,15 @@ def battle()
 	elsif action.downcase.include? "ma"
 		$magics.list
 		$magics.order
-		
+
 	else
 		puts "Dancing isn't going to help! Fight!!!"
 		battle
 	end
-	
-	
+
+
 ############## DRAGON HITS
-	
+
 	while mob_hits < $mob.hits
 		if $stats[:dodge] == 0 || rand($stats[:dodge]) <= 0
 			if $stats[:blo] > 0 && rand($stats[:blo]) > 1
@@ -133,7 +133,7 @@ def battle()
 		player_health_check()
 		mob_hits += 1
 	end
-	
+
 	if $player_buff_counter > 0 && $player_buff
 		$magics.cast_buff
 		$player_buff_counter -= 1
@@ -141,8 +141,8 @@ def battle()
 			$player_buff = false
 		end
 	end
-	
-	
+
+
 	battle
 end
 
