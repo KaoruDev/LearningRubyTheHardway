@@ -4,3 +4,5 @@ Dir["#{File.dirname(__FILE__)}/lib/**/*.rb"].each do |f|
   load f
 end
 
+#Game.new
+

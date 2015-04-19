@@ -1,25 +1,23 @@
 class ClassPicker
   class << self
+    def pick_class
+      AskQuestion.multiple_choice("Which art will you master?", class_choices)
+    end
 
-    def descriptions
-      class_map.values.each_with_index do |klass, idx|
-        puts "(#{idx + 1}) #{klass.fancy_name} - #{klass.description}"
+    def class_choices
+      roster.inject({}) do |choices, klass|
+        choices[klass.description] = -> { klass.new }
+        choices
       end
     end
 
-    def pick_class(idx)
-      class_name = class_map.keys[idx.to_i - 1]
-      class_map[class_name]
-    end
-
-    def class_map
-      Dir.entries(class_path)[2..-1].inject({}) do |map, filename|
+    def roster
+      Dir.entries(class_path)[2..-1].map do |filename|
         # Ugh, don't load vim swap files
-        return map if filename.match(/^\..+\.swp$/)
+        skip if filename.match(/^\..+\.swp$/)
         class_name = filename.gsub(".rb", "").capitalize
-        map[class_name] = const_get(class_name) if const_defined?(class_name)
-        map
-      end
+        const_get(class_name) if const_defined?(class_name)
+      end.compact
     end
 
     def class_path
