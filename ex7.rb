@@ -1,0 +1,17 @@
+puts "Mary had a little lamb."
+puts "Its flece was white as %s." % 'snow'
+puts "And everywhere that Mary went."
+puts "." * 10
+
+end1 = "C"
+end2 = "h"
+end3 = "e"
+end4 = "e"
+end5 = "s"
+end6 = "e"
+end7 = "B"
+end8 = "u"
+end9 = "r"
+end10 = "g"
+end11 = "e"
+end12 = "r"
