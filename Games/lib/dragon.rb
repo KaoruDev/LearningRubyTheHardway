@@ -5,10 +5,6 @@ class Dragon
     "The #{Colors.red("Dragon")}"
   end
 
-  def initialize(configs={})
-    generate_stats
-  end
-
   def fancy_name
     self.class.fancy_name
   end

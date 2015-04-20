@@ -37,7 +37,7 @@ On guard! What would you like to do?
     }
 
     self.class.skills.each do |klass, skill_name|
-      available_skills[klass.description] = method(skill_name) if klass.cost < @mp
+      available_skills[klass.description] = method(skill_name) if klass.cost < @mp && !affected_by?(skill_name)
     end
 
     available_skills

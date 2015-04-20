@@ -1,8 +1,13 @@
 module ClassStats
   def self.included(base)
     base.class_eval do
-      attr_accessor :hp, :mp, :enemy
+      attr_accessor :hp, :mp, :enemy, :hits
     end
+  end
+
+  def initialize
+    @affected_spells = {}
+    generate_stats
   end
 
   def enemy=(enemy)
@@ -73,6 +78,21 @@ module ClassStats
     hp_regen = @hp_regen || 1
     @hp += (modifiers[:hp] * hp_regen).round
     @mp += (modifiers[:mp] * mp_regen).round
+  end
+
+  def affected_by?(spell)
+    !!@affected_spells[spell.to_sym]
+  end
+
+  def register_spell(spell)
+    @affected_spells[spell.id] = spell
+  end
+
+  def apply_spell_effects
+    @affected_spells.each do |key, spell|
+      spell.apply
+      @affected_spells.delete(key) if spell.done?
+    end
   end
 
 end

@@ -12,15 +12,12 @@ class Battle
 
   def next_round
     loop do
-      apply_round_spells
+      @actors.each(&:apply_spell_effects)
       @actors.each(&:action)
       @actors.each(&:regenerate)
       Prompter.enemy_stats(@enemy)
       break if is_someone_dead?
     end
-  end
-
-  def apply_round_spells
   end
 
   def is_someone_dead?
