@@ -22,7 +22,6 @@ class Haste
     @player.register_spell(self)
 		puts Colors.cyan("The winds lend you their speed!")
     @player.mp -= COST
-    @player.attack
   end
 
   def apply
