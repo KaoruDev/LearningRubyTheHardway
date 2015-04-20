@@ -1,7 +1,8 @@
-require_relative '../class_stats.rb'
+require_relative "../skill_loader"
 
 class Elf
   include ClassStats
+  include SkillLoader
 
   def self.fancy_name
     Colors.green("Elf")

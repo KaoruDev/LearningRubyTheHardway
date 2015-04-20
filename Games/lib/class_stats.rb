@@ -1,7 +1,7 @@
 module ClassStats
   def self.included(base)
     base.class_eval do
-      attr_reader :hp, :mp
+      attr_accessor :hp, :mp, :enemy
     end
   end
 
@@ -75,16 +75,4 @@ module ClassStats
     @mp += (modifiers[:mp] * mp_regen).round
   end
 
-  def action
-    question = <<-QUESTION
-
-=================================
-On guard! What would you like to do?
-    QUESTION
-
-    AskQuestion.multiple_choice(question, {
-      "Attack with all your might!" => method(:attack),
-      "Cast a spell!" => method(:magic)
-    }, self)
-  end
 end

@@ -31,13 +31,14 @@ class AskQuestion
       find_answer(response)
     rescue InvalidAnswer
       Prompter.didnt_get_that
-      self.class.new(@question, @options).run
+      self.class.new(@question, @options).run(player)
     end
 
     def display_options
       @options.keys.each_with_index do |option, idx|
         puts "#{idx + 1}) #{option}"
       end
+      puts ""
     end
 
     def find_answer(response)
