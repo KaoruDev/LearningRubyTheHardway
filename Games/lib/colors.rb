@@ -1,5 +1,5 @@
 class Colors
-  {
+  MAP = {
     :red => 31,
     :green => 32,
     :yellow => 33,
@@ -15,6 +15,13 @@ class Colors
   end
 
   class << self
+    def randomize_letters(word)
+      colors = MAP.keys
+      word.chars.map do |letter|
+        self.public_send(colors.sample, letter)
+      end.join
+    end
+
     private
 
     def generate_color(color_code, str)

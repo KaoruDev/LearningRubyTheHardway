@@ -1,7 +1,9 @@
+require "readline"
+
 class Prompter
-  def self.run
-    print ":>"
-    gets.chomp
+  def self.run(player=nil)
+    return player_prompt(player) if player
+    Readline.readline(":> ")
   end
 
   def self.didnt_get_that
@@ -13,6 +15,14 @@ class Prompter
 
 
     MSG
+  end
+
+  def self.player_prompt(player)
+    Readline.readline "( #{Colors.green(player.hp)}HP #{Colors.yellow(player.mp)}MP ) :: > "
+  end
+
+  def self.enemy_stats(enemy)
+    puts "\n#{enemy.fancy_name} has (#{Colors.red(enemy.hp)}hp) left."
   end
 
 end

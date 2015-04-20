@@ -12,8 +12,8 @@ class AskQuestion
     return yes_no(question, actions)
   end
 
-  def self.multiple_choice(question, options={})
-    MultipleChoice.new(question, options).run
+  def self.multiple_choice(question, options={}, player=nil)
+    MultipleChoice.new(question, options).run(player)
   end
 
   class MultipleChoice
@@ -24,10 +24,10 @@ class AskQuestion
       @options = options
     end
 
-    def run
+    def run(player)
       puts @question
       display_options
-      response = Prompter.run
+      response = Prompter.run(player)
       find_answer(response)
     rescue InvalidAnswer
       Prompter.didnt_get_that

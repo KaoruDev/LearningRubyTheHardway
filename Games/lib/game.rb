@@ -5,14 +5,15 @@ class Game
 
   def pick_class
     @player = ClassPicker.pick_class
-    are_stats_ok
+    check_stats
+    battle_begin
   end
 
-  def dislay_classes
-    Utils.available_classes
+  def battle_begin
+    Battle.new(@player)
   end
 
-  def are_stats_ok
+  def check_stats
     question = "#{@player.stats}\n\nHappy with stats?"
 
     AskQuestion.yes_no(question, {
@@ -30,7 +31,7 @@ class Game
         "Pick another class" => method(:pick_class),
         "Roll again" => -> {
           @player.generate_stats
-          are_stats_ok
+          check_stats
         }
       })
   end
