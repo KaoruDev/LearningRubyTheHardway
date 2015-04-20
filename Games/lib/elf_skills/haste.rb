@@ -2,7 +2,7 @@ class Haste
   COST = 50
 
   def self.description
-		"#{Colors.green("Terra's Haste")} (#{cost}mp) - increase hits per round (+ 2-5 hits) lasts 5 rounds."
+		"Terra's Haste (#{Colors.green(cost)}mp) - increase hits per round (+ 2-5 hits) lasts 5 rounds."
   end
 
   def self.cost
