@@ -15,7 +15,8 @@ class Dragon
 
   def action
     rand(1..@hits).times do
-      self.public_send(random_action) do |damage, msg|
+      self.public_send(random_action) do |damage, msg, mp|
+        @mp -= mp
         @enemy.take_damage(damage, msg)
       end
     end
@@ -25,7 +26,7 @@ class Dragon
     dice = rand(1..10)
     return :tail if (1..3).include?(dice)
     return :roar if (4..6).include?(dice) && @mp > 20
-    return :fire if (9..10).include?(dice) && @mp > 100
+    return :fire if 10 == dice && @mp > 10
     :claw
   end
 
@@ -35,9 +36,9 @@ class Dragon
 
   def modifiers
     {
-      :hp => rand(15..25),
-      :mp => rand(10..15),
-      :hits => rand(3..5),
+      :hp => rand(20..25),
+      :mp => rand(8..12),
+      :hits => rand(4..6),
       :dodge => rand(1..2)
     }
   end
@@ -55,14 +56,14 @@ The #{fancy_name} ROARS in AGONY as it disintergrates into ash...
 
   # Defining actions
   {
-    :claw => ["#{self.fancy_name} swings it's MASSIVE claw", (5..15)],
-    :tail => ["#{self.fancy_name} whips it's tail", (10..20)],
-    :roar => ["#{self.fancy_name}'s deafening roar", (1..50)],
-    :fire => ["#{self.fancy_name}'s funnel of #{Colors.red("FIRE")}", (20..150)]
-  }.each do |action_name, (msg, range)|
+    :claw => ["#{self.fancy_name} swings it's MASSIVE claw", (5..15), 0],
+    :tail => ["#{self.fancy_name} whips it's tail", (10..20), 0],
+    :roar => ["#{self.fancy_name}'s deafening roar", (1..75), 20],
+    :fire => ["#{self.fancy_name}'s funnel of #{Colors.red("FIRE")}", (50..250), 150]
+  }.each do |action_name, (msg, range, mp)|
     class_eval <<-ACTIONS
       def #{action_name}
-        yield(rand(#{range}), "#{msg}")
+        yield(rand(#{range}), "#{msg}", #{mp})
       end
     ACTIONS
   end

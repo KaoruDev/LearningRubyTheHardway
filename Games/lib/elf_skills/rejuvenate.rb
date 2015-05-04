@@ -1,9 +1,9 @@
 class Rejuvenate
   COST = 75
-  HEAL_RANGE = (20..50)
+  HEAL_RANGE = (30..75)
 
   def self.description
-		"Rejuvination (#{Colors.green(cost)}mp) - Regenerate up to 400hp over 4 rounds."
+		"Rejuvination (#{Colors.green(cost)}mp) - Regenerate (120hp - 300hp) over 4 rounds."
   end
 
   def self.cost

@@ -1,6 +1,6 @@
 class TrueShot
   COST = 100
-  DAMAGE_RANGE = (100..300)
+  DAMAGE_RANGE = (100..500)
 
   def self.description
 		"True shot (#{Colors.green(cost)}mp) - let Terra guide your arrow! (#{DAMAGE_RANGE} dmg)"
@@ -17,7 +17,7 @@ class TrueShot
   def run
     damage = rand(DAMAGE_RANGE)
     puts "You close your eyes and trust in #{Colors.green("Terra")} to guide your arrow."
-    @player.enemy.take_damage(damage, "#{Colors.green("Terra")}'s vision")
+    @player.enemy.take_damage(damage, "#{Colors.green("Terra")} releases a GIANT bolt and")
     @player.mp -= COST
   end
 end

@@ -12,7 +12,9 @@ class HitsScale
       ">>#{Colors.red("EVISVERATES")}<<"
     elsif (50..100).include?(damage)
       "<<=#{Colors.yellow("DE")}#{Colors.red("VITAL")}#{Colors.yellow("IZES")}=>>"
-    elsif damage > 100
+    elsif (100..200).include?(damage)
+      "deals #{Colors.red("<<=")} #{Colors.bold("GODLIKE")} #{Colors.red("=>>")} damage"
+    elsif damage > 200
       Colors.randomize_letters("OUTER REALM PAIN")
     end
 

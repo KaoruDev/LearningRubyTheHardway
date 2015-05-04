@@ -5,7 +5,8 @@ class Colors
     :yellow => 33,
     :blue => 34,
     :magenta => 35,
-    :cyan => 36
+    :cyan => 36,
+    :bold => 1
   }.each do |color_name, color_code|
     self.instance_eval <<-INSTANCE_METH
       def self.#{color_name}(str)

@@ -17,6 +17,7 @@ class Elf
   def initialize
     super
     @extra_hits = 0
+    @crit_chance = 5
   end
 
   def modifiers
@@ -31,7 +32,11 @@ class Elf
   def attack
     puts ""
     (rand(3..@hits) + @extra_hits).times do
-      @enemy.take_damage(rand(10..20), "Your arrows shoots true and")
+      if rand(1..10) < @crit_chance
+        @enemy.take_damage(rand(20..30), "#{Colors.green("Gaia")} gives you wisdom to see your enemies weakness. Your arrow")
+      else
+        @enemy.take_damage(rand(10..20), "Your arrows shoots true and")
+      end
     end
     @extra_hits = 0
   end
