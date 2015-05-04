@@ -1,4 +1,4 @@
-class Haste
+class HasteSpell
   COST = 50
 
   def self.description
@@ -15,23 +15,26 @@ class Haste
   end
 
   def id
-    :haste
+    :haste_spell
   end
 
   def run
     @player.register_spell(self)
 		puts Colors.cyan("The winds lend you their speed!")
     @player.mp -= COST
+    @haste_added = rand(5..10)
+    @player.haste += @haste_added
   end
 
   def apply
-    puts ""
-		puts Colors.green("You feel the wind at your aid")
-    @player.extra_hits = rand(2..5)
+		puts Colors.green("\nYou feel the wind at your aid")
     @rounds -= 1
   end
 
   def done?
-    @rounds <= 0
+    if @rounds <= 0
+      @player.haste -= @haste_added
+      true
+    end
   end
 end

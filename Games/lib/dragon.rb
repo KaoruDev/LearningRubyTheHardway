@@ -14,7 +14,7 @@ class Dragon
   end
 
   def action
-    rand(1..@hits).times do
+    rand(1..@haste).times do
       self.public_send(random_action) do |damage, msg, mp|
         @mp -= mp
         @enemy.take_damage(damage, msg)
@@ -38,8 +38,7 @@ class Dragon
     {
       :hp => rand(20..25),
       :mp => rand(8..12),
-      :hits => rand(4..6),
-      :dodge => rand(1..2)
+      :haste => rand(2..4)
     }
   end
 

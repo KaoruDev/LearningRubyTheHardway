@@ -4,7 +4,7 @@ class Elf
   include ClassStats
   include SkillLoader
 
-  attr_writer :extra_hits
+  attr_writer :haste
 
   def self.fancy_name
     Colors.green("Elf")
@@ -17,21 +17,20 @@ class Elf
   def initialize
     super
     @extra_hits = 0
-    @crit_chance = 5
+    @crit_chance = 4
   end
 
   def modifiers
     {
-      :hp => rand(3..5),
-      :mp => rand(6..10),
-      :hits => rand(4..6),
-      :dodge => rand(4..6)
+      :hp => 3,
+      :mp => 6,
+      :haste => 5
     }
   end
 
   def attack
     puts ""
-    (rand(3..@hits) + @extra_hits).times do
+    (rand(3..@haste)).times do
       if rand(1..10) < @crit_chance
         @enemy.take_damage(rand(20..30), "#{Colors.green("Gaia")} gives you wisdom to see your enemies weakness. Your arrow")
       else
@@ -40,7 +39,6 @@ class Elf
     end
     @extra_hits = 0
   end
-
 
   def dodge_message
     "Gaia gives you speed to dodge #{@enemy.fancy_name}'s attack!"

@@ -18,22 +18,8 @@ class Game
 
     AskQuestion.yes_no(question, {
       :yes => -> { true },
-      :no => -> {
-        reroll_or_pick_again
-      }
+      :no => method(:pick_class)
     })
-  end
-
-  def reroll_or_pick_again
-    AskQuestion.multiple_choice(
-      "What would you like to do?",
-      {
-        "Pick another class" => method(:pick_class),
-        "Roll again" => -> {
-          @player.generate_stats
-          check_stats
-        }
-      })
   end
 
 end

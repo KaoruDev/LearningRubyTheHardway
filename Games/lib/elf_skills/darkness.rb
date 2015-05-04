@@ -24,7 +24,7 @@ class Darkness
   def run
     damage = rand(DAMAGE_RANGE)
     puts "The winds of the sky aid you as you shoot arrows into the sky"
-    rand(30..75).times do
+    rand(60..75).times do
       damage = rand(DAMAGE_RANGE)
       @player.enemy.take_damage(damage, DESCRIPTIONS.sample)
     end

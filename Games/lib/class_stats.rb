@@ -1,7 +1,7 @@
 module ClassStats
   def self.included(base)
     base.class_eval do
-      attr_accessor :hp, :mp, :enemy, :hits
+      attr_accessor :hp, :mp, :enemy, :haste
     end
   end
 
@@ -22,8 +22,7 @@ module ClassStats
     <<-STATS
       "HP: #{Colors.green(@hp)}"
       "MP: #{Colors.green(@mp)}"
-      "dodge: #{Colors.green(@dodge)}"
-      "hits: #{Colors.green(@hits)}"
+      "haste: #{Colors.green(@haste)}"
     STATS
   end
 
@@ -31,7 +30,7 @@ module ClassStats
     @hp = (modifiers[:hp] * 100).round
     @mp = (modifiers[:mp] * 50).round
     @dodge = modifiers[:dodge]
-    @hits = modifiers[:hits]
+    @haste = modifiers[:haste]
   end
 
   def dead?
@@ -58,7 +57,7 @@ module ClassStats
   end
 
   def dodge
-    if rand(1..10) < @dodge
+    if rand(1..15) < @haste
       puts dodge_message
       true
     end
@@ -68,7 +67,7 @@ module ClassStats
     {
       :hp => 1,
       :mp => 1,
-      :hits => 1,
+      :haste => 1,
       :dodge => 1
     }
   end
@@ -77,7 +76,7 @@ module ClassStats
     mp_regen = @mp_regen || 1
     hp_regen = @hp_regen || 1
     @hp += (modifiers[:hp] * hp_regen).round
-    @mp += (modifiers[:mp] * mp_regen).round
+    @mp += (modifiers[:mp] * mp_regen * 3).round
   end
 
   def affected_by?(spell)

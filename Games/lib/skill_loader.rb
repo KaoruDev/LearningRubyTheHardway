@@ -4,7 +4,6 @@ module SkillLoader
 
     skill_dir = "#{base.name.downcase}_skills"
     Dir.entries("./lib/#{skill_dir}")[2..-1].each do |filename|
-      next if filename.match(/^\..+\.swp$/)
       require_relative "./#{skill_dir}/#{filename}"
       skill_name = filename.gsub("\.rb", "")
       class_name = skill_name.split("_").map do |word|
